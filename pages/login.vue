@@ -12,7 +12,7 @@
       ></v-text-field>
       <v-btn
         block
-        @click="authStore.login(password)"
+        @click="handleLogin(password)"
         :loading="authStore.isLoginLoading"
       >
         SUBMIT
@@ -35,7 +35,14 @@ import { useAuthStore } from '~/stores/authStore'
 
 const authStore = useAuthStore()
 
+const router = useRouter()
+
 const password = ref<string>('')
+
+const handleLogin = async (password: string) => {
+  const isSuccess = await authStore.login(password)
+  if (isSuccess) router.push('/')
+}
 </script>
 
 <style scoped lang="scss">

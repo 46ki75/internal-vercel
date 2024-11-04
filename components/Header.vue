@@ -11,7 +11,12 @@
       <ElmLoginIcon
         :is-loading="authStore.isCheckSessionLoading"
         :is-login="!authStore.isCheckSessionError"
-        @click="authStore.logout"
+        @click="
+          async () => {
+            const isSuccess = await authStore.logout()
+            if (isSuccess) $router.push('/login')
+          }
+        "
       />
     </div>
   </header>
@@ -26,9 +31,15 @@ import { useAuthStore } from '~/stores/authStore'
 const authStore = useAuthStore()
 
 const route = useRoute()
+const router = useRouter()
 
-watch(() => route.path, authStore.checkSession)
-onMounted(authStore.checkSession)
+const checkSession = async () => {
+  const isSuccess = await authStore.checkSession()
+  if (!isSuccess) router.push('/login')
+}
+
+watch(() => route.path, checkSession)
+onMounted(checkSession)
 </script>
 
 <style scoped lang="scss">

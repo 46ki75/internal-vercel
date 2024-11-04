@@ -19,7 +19,7 @@ export const useAuthStore = defineStore('auth', {
     isInSession: false
   }),
   actions: {
-    async login(password: string) {
+    async login(password: string): Promise<boolean> {
       this.isLoginLoading = true
       this.isLoginError = false
       try {
@@ -33,25 +33,25 @@ export const useAuthStore = defineStore('auth', {
         if (!response.ok) {
           throw new Error('An error occured.')
         }
-        const router = useRouter()
-        router.push('/')
+        return true
       } catch (error) {
         this.isLoginError = true
         console.error(error)
+        return false
       } finally {
         this.isLoginLoading = false
       }
     },
-    async logout() {
+    async logout(): Promise<boolean> {
       try {
         await fetch('/api/auth/logout', { method: 'POST' })
-        const router = useRouter()
-        router.push('/login')
+        return true
       } catch {
         console.error('An error occured while logging out.')
+        return false
       }
     },
-    async checkSession() {
+    async checkSession(): Promise<boolean> {
       this.isCheckSessionLoading = true
 
       this.isCheckSessionError = false
@@ -60,10 +60,10 @@ export const useAuthStore = defineStore('auth', {
         if (!response.ok) {
           throw new Error('You are not logged in.')
         }
+        return true
       } catch (error) {
         this.isCheckSessionError = true
-        const router = useRouter()
-        router.push('/login')
+        return false
       } finally {
         this.isCheckSessionLoading = false
       }
