@@ -5,10 +5,11 @@ interface Learn {
   id: string
   nextReviewAt: string
   tags: Array<{ id: string; name: string; color: string }>
-  repetitionCount: string
-  easeFactor: string
+  repetitionCount: number
+  easeFactor: number
   createdAt: string
   updatedAt: string
+  url: string
 }
 
 export default defineEventHandler(async (event) => {
@@ -50,15 +51,24 @@ export default defineEventHandler(async (event) => {
         throw new Error('Notion response does not have nextReviewAt date')
       }
 
-      if (result.properties.tags.type !== 'multi_select') {
+      if (
+        result.properties.tags.type !== 'multi_select' ||
+        'options' in result.properties.tags.multi_select
+      ) {
         throw new Error('Notion response does not have tags')
       }
 
-      if (result.properties.repetitionCount.type !== 'number') {
+      if (
+        result.properties.repetitionCount.type !== 'number' ||
+        typeof result.properties.repetitionCount.number !== 'number'
+      ) {
         throw new Error('Notion response does not have repetitionCount')
       }
 
-      if (result.properties.easeFactor.type !== 'number') {
+      if (
+        result.properties.easeFactor.type !== 'number' ||
+        typeof result.properties.easeFactor.number !== 'number'
+      ) {
         throw new Error('Notion response does not have easeFactor')
       }
 
@@ -77,8 +87,9 @@ export default defineEventHandler(async (event) => {
         repetitionCount: result.properties.repetitionCount.number,
         easeFactor: result.properties.easeFactor.number,
         createdAt: result.created_time,
-        updatedAt: result.last_edited_time
-      }
+        updatedAt: result.last_edited_time,
+        url: result.url
+      } as Learn
     })
 
     setResponseStatus(event, 200)
