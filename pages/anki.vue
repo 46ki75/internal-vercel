@@ -1,18 +1,7 @@
 <template>
-  <div class="wrapper">
+  <div class="container">
     <div class="vertical-container">
       <AnkiInfo />
-
-      <template v-if="ankiStore.currentLearn != null">
-        <AnkiTags
-          :tags="
-            ankiStore.currentLearn.tags.map((tag) => ({
-              text: tag.name,
-              color: tag.color
-            }))
-          "
-        />
-      </template>
 
       <template v-if="ankiStore.block != null">
         <div class="card">
@@ -60,7 +49,7 @@ watch(() => ankiStore.isUpdateLoading, ankiStore.next)
 </script>
 
 <style scoped lang="scss">
-.wrapper {
+.container {
   width: 100%;
   display: flex;
   justify-content: center;

@@ -24,11 +24,25 @@
         <ElmInlineText text="New" />
       </v-btn>
     </div>
+
+    <template v-if="ankiStore.currentLearn != null">
+      <AnkiTags
+        :tags="
+          ankiStore.currentLearn.tags.map((tag) => ({
+            text: tag.name,
+            color: tag.color
+          }))
+        "
+      />
+    </template>
+    <template v-else>
+      <ElmBlockFallback />
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ElmInlineText } from '@elmethis/core'
+import { ElmInlineText, ElmBlockFallback } from '@elmethis/core'
 import { PencilSquareIcon, PlusIcon } from '@heroicons/vue/24/solid'
 import { useAnkiStore } from '~/stores/ankiStore'
 
