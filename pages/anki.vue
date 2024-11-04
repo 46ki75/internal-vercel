@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="vertical-container">
-      {{ ankiStore.learnList.length }}
+      <ElmInlineText :text="`Remain: ${ankiStore.getRemainCount()}`" />
 
       <ElmInlineText
         v-if="ankiStore.currentLearn"

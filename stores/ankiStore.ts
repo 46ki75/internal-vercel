@@ -129,6 +129,18 @@ export const useAnkiStore = defineStore('user', {
     },
     setIsShowAnswer(isShowAnswer: boolean) {
       this.isShowAnswer = isShowAnswer
+    },
+    getRemainCount() {
+      if (this.currentLearn != null) {
+        const now = new Date()
+        const nextReviewAt = this.learnList.map(
+          (learn) => new Date(learn.nextReviewAt)
+        )
+        return (
+          nextReviewAt.filter((date) => date < now).length +
+          (new Date(this.currentLearn.nextReviewAt) < now ? 1 : 0)
+        )
+      }
     }
   }
 })
