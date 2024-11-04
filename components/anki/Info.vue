@@ -8,7 +8,7 @@
       />
     </div>
 
-    <div>
+    <div class="button-container">
       <v-btn
         :loading="ankiStore.currentLearn == null"
         @click="
@@ -49,6 +49,13 @@ const create = async () => {
 </script>
 
 <style scoped lang="scss">
+.button-container {
+  margin-block: 1rem;
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+
 .icon {
   width: 16px;
 }
