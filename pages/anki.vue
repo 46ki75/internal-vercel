@@ -1,6 +1,10 @@
 <template>
   <div class="wrapper">
     <div class="vertical-container">
+      {{ learnList.length }}
+
+      <ElmInlineText v-if="currentLearn" :text="currentLearn?.id" />
+
       <AnkiInfo />
 
       <template v-if="currentLearn != null">
@@ -34,27 +38,16 @@
             <ElmJsonRenderer :json="block.explanation" />
           </div>
 
-          <div class="button-container">
-            <v-btn color="rgb(233,233,233)">
-              <span style="color: black">FORGETFUL</span>
-            </v-btn>
-            <v-btn color="rgb(233,233,233)">
-              <span style="color: black">INCORRECT</span>
-            </v-btn>
-            <v-btn color="rgb(233,233,233)">
-              <span style="color: black">ALMOST</span>
-            </v-btn>
-            <v-btn color="rgb(33,33,33)">
-              <span style="color: white">LUCKY GUESS</span>
-            </v-btn>
-            <v-btn color="rgb(33,33,33)">
-              <span style="color: white">CORRECT</span>
-            </v-btn>
-            <v-btn color="rgb(33,33,33)">
-              <span style="color: white">CONFIDENT</span>
-            </v-btn>
-          </div>
+          <AnkiUpdate
+            v-if="currentLearn != null"
+            :id="currentLearn?.id"
+            :ease-factor="currentLearn?.easeFactor"
+            :repetition-count="currentLearn?.repetitionCount"
+            :next-review-at="currentLearn?.nextReviewAt"
+            v-model="isLoadingUpdate"
+          />
         </template>
+
         <v-btn v-if="!isShowAnswer" @click="isShowAnswer = true">
           SHOW ANSWER
         </v-btn>
@@ -66,6 +59,7 @@
 <script setup lang="ts">
 import {
   ElmDivider,
+  ElmDotLoadingIcon,
   ElmInlineText,
   ElmJsonRenderer,
   type ElmJsonRendererProps
@@ -75,8 +69,8 @@ interface Learn {
   id: string
   nextReviewAt: string
   tags: Array<{ id: string; name: string; color: string }>
-  repetitionCount: string
-  easeFactor: string
+  repetitionCount: number
+  easeFactor: number
   createdAt: string
   updatedAt: string
 }
@@ -93,7 +87,12 @@ const fetchLearn = async () => {
   const response = await fetch('/api/anki/learn')
   const data: Learn[] = await response.json()
   learnList.value = data
-  currentLearn.value = data.shift() ?? null
+  await next()
+}
+
+const next = async () => {
+  currentLearn.value = learnList.value.shift() ?? null
+  learnList.value = [...learnList.value]
   if (currentLearn.value != null) {
     await fetchBlock(currentLearn.value.id)
   }
@@ -107,6 +106,9 @@ const fetchBlock = async (id: string) => {
 }
 
 const isShowAnswer = ref(false)
+const isLoadingUpdate = ref(false)
+
+watch(() => isLoadingUpdate, next)
 </script>
 
 <style scoped lang="scss">
@@ -135,11 +137,5 @@ const isShowAnswer = ref(false)
 
 .card {
   margin-block: 1.5rem;
-}
-
-.button-container {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
 }
 </style>

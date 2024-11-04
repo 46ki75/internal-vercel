@@ -34,21 +34,23 @@ export default defineEventHandler(async (event) => {
   let marker: 'front' | 'back' | 'explanation' = 'front'
 
   for (const component of components) {
+    console.log('MARKER #', marker)
+    console.log(component)
     if (
       component.type === 'ElmHeading1' &&
-      component.props?.text?.toLocaleLowerCase() === 'front'
+      component.props?.text?.toLocaleLowerCase().trim() === 'front'
     ) {
       marker = 'front'
       continue
     } else if (
       component.type === 'ElmHeading1' &&
-      component.props?.text?.toLocaleLowerCase() === 'back'
+      component.props?.text?.toLocaleLowerCase().trim() === 'back'
     ) {
       marker = 'back'
       continue
     } else if (
       component.type === 'ElmHeading1' &&
-      component.props?.text?.toLocaleLowerCase() === 'explanation'
+      component.props?.text?.toLocaleLowerCase().trim() === 'explanation'
     ) {
       marker = 'explanation'
       continue

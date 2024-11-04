@@ -5,14 +5,13 @@ export default defineEventHandler(async (event) => {
   const { body, isValid } = await validateJwtWithEvent(event)
   if (!isValid) return body
 
-  const id = getRouterParam(event, 'id')
+  const { id, nextReviewAt, easeFactor, repetitionCount } =
+    await readBody(event)
 
   if (id == null) {
-    setResponseStatus(event, 500)
-    return { error: 'Notion page ID is not set' }
+    setResponseStatus(event, 400)
+    return { error: 'id is required' }
   }
-
-  const { nextReviewAt, easeFactor, repetitionCount } = await readBody(event)
 
   if (nextReviewAt == null) {
     setResponseStatus(event, 400)
