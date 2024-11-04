@@ -1,4 +1,3 @@
-// stores/userStore.ts
 import { defineStore } from '#imports'
 import type { ElmJsonRendererProps } from '@elmethis/core'
 

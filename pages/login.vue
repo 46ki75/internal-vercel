@@ -10,12 +10,16 @@
         placeholder="Enter your password"
         clearable
       ></v-text-field>
-      <v-btn block @click="login(password)" :loading="isLoading">
+      <v-btn
+        block
+        @click="authStore.login(password)"
+        :loading="authStore.isLoginLoading"
+      >
         SUBMIT
       </v-btn>
       <div class="error">
         <ElmInlineText
-          v-if="isError"
+          v-if="authStore.isLoginError"
           text="An Error occured."
           color="#b36472"
         />
@@ -27,34 +31,11 @@
 <script setup lang="ts">
 import { ElmInlineText } from '@elmethis/core'
 
-const router = useRouter()
+import { useAuthStore } from '~/stores/authStore'
+
+const authStore = useAuthStore()
 
 const password = ref<string>('')
-const isError = ref(false)
-const isLoading = ref(false)
-
-const login = async (password: string) => {
-  isLoading.value = true
-  isError.value = false
-  try {
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ password })
-    })
-    if (!response.ok) {
-      throw new Error('An error occured.')
-    }
-    router.push('/')
-  } catch (error) {
-    isError.value = true
-    console.error(error)
-  } finally {
-    isLoading.value = false
-  }
-}
 </script>
 
 <style scoped lang="scss">

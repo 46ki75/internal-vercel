@@ -9,9 +9,9 @@
     <div class="icon-container">
       <ElmToggleTheme />
       <ElmLoginIcon
-        :is-loading="isLoading"
-        :is-login="!isError"
-        @click="logout"
+        :is-loading="authStore.isCheckSessionLoading"
+        :is-login="!authStore.isCheckSessionError"
+        @click="authStore.logout"
       />
     </div>
   </header>
@@ -21,39 +21,14 @@
 import { ElmLoginIcon, ElmToggleTheme } from '@elmethis/core'
 import { HomeIcon, SwatchIcon, TagIcon } from '@heroicons/vue/24/solid'
 
-const router = useRouter()
+import { useAuthStore } from '~/stores/authStore'
+
+const authStore = useAuthStore()
+
 const route = useRoute()
 
-const isLoading = ref(false)
-const isError = ref(false)
-
-const checkSession = async () => {
-  isLoading.value = true
-  isError.value = false
-  try {
-    const response = await fetch('/api/auth/session')
-    if (!response.ok) {
-      throw new Error('You are not logged in.')
-    }
-  } catch (error) {
-    isError.value = true
-    router.push('/login')
-  } finally {
-    isLoading.value = false
-  }
-}
-
-const logout = async () => {
-  try {
-    await fetch('/api/auth/logout', { method: 'POST' })
-    router.push('/login')
-  } catch {
-    console.error('An error occured while logging out.')
-  }
-}
-
-watch(() => route.path, checkSession)
-onMounted(checkSession)
+watch(() => route.path, authStore.checkSession)
+onMounted(authStore.checkSession)
 </script>
 
 <style scoped lang="scss">
