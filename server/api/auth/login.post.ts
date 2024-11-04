@@ -1,4 +1,5 @@
 import { verify } from 'argon2'
+import { SignJWT, jwtVerify } from 'jose'
 import 'dotenv/config'
 
 export default defineEventHandler(async (event) => {
@@ -10,6 +11,13 @@ export default defineEventHandler(async (event) => {
     if (hash == null) {
       setResponseStatus(event, 500)
       return { error: 'Hashed password is not set' }
+    }
+
+    const jwtSecretKey = process.env.JWT_SECRET_KEY
+
+    if (jwtSecretKey == null) {
+      setResponseStatus(event, 500)
+      return { error: 'JWT secret key is not set' }
     }
 
     const isValidBody = await readValidatedBody(event, (body) => {
@@ -35,9 +43,25 @@ export default defineEventHandler(async (event) => {
     if (!isValid) {
       setResponseStatus(event, 401)
       return { error: 'Invalid password' }
-    }
+    } else {
+      const payload = {}
 
-    return { message: 'Success' }
+      const secret = new TextEncoder().encode(jwtSecretKey)
+
+      const token = await new SignJWT(payload)
+        .setProtectedHeader({ alg: 'HS256' })
+        .setExpirationTime('7d')
+        .sign(secret)
+
+      setCookie(event, 'jwt_session_token', token, {
+        maxAge: 60 * 60 * 24 * 7,
+        path: '/',
+        httpOnly: true,
+        secure: process.env.NODE_ENV !== 'development'
+      })
+
+      return { token }
+    }
   } catch {
     setResponseStatus(event, 500)
     return { error: 'Internal server error' }

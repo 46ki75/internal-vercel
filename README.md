@@ -4,4 +4,5 @@
 
 ```ini
 PASSWORD=""
+JWT_SECRET_KEY="secret"
 ```
