@@ -1,12 +1,37 @@
 <template>
   <header class="header">
-    <ElmInlineText text="HEADER" />
     <ElmToggleTheme />
+    <ElmLoginIcon
+      :is-loading="status === 'pending'"
+      :is-login="error == null"
+      @click="logout"
+    />
   </header>
 </template>
 
 <script setup lang="ts">
-import { ElmInlineText, ElmToggleTheme } from '@elmethis/core'
+import { ElmLoginIcon, ElmToggleTheme } from '@elmethis/core'
+
+const router = useRouter()
+const route = useRoute()
+
+const { refresh, error, status } = useFetch('/api/auth/session')
+
+const logout = async () => {
+  try {
+    await fetch('/api/auth/logout', { method: 'POST' })
+    router.push('/login')
+  } catch {
+    console.error('An error occured while logging out.')
+  }
+}
+
+watch(
+  () => route.fullPath,
+  () => {
+    refresh()
+  }
+)
 </script>
 
 <style scoped lang="scss">
