@@ -53,6 +53,8 @@
     <div v-else class="fallback">
       <ElmDotLoadingIcon />
     </div>
+
+    <div class="margin"></div>
   </div>
 </template>
 
@@ -75,5 +77,9 @@ const ankiStore = useAnkiStore()
   height: 4rem;
   display: flex;
   justify-content: center;
+}
+
+.margin {
+  height: 20rem;
 }
 </style>
