@@ -34,8 +34,6 @@ export default defineEventHandler(async (event) => {
   let marker: 'front' | 'back' | 'explanation' = 'front'
 
   for (const component of components) {
-    console.log('MARKER #', marker)
-    console.log(component)
     if (
       component.type === 'ElmHeading1' &&
       component.props?.text?.toLocaleLowerCase().trim() === 'front'
