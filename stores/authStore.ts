@@ -1,4 +1,4 @@
-import { defineStore } from '#imports'
+import { defineStore } from 'pinia'
 
 interface AuthState {
   isLoginLoading: boolean

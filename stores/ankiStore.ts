@@ -1,4 +1,4 @@
-import { defineStore } from '#imports'
+import { defineStore } from 'pinia'
 import type { ElmJsonRendererProps } from '@elmethis/core'
 
 interface Learn {

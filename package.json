@@ -16,11 +16,11 @@
     "@heroicons/vue": "^2.1.5",
     "@mdi/font": "^7.4.47",
     "@notionhq/client": "^2.2.15",
-    "@pinia/nuxt": "^0.7.0",
     "argon2": "^0.41.1",
     "dotenv": "^16.4.5",
     "jose": "^5.9.6",
     "nuxt": "^3.13.2",
+    "pinia": "^2.2.6",
     "polished": "^4.3.1",
     "vue": "latest",
     "vue-router": "latest"
