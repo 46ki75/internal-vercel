@@ -8,17 +8,43 @@
         </div>
         <template v-if="isShowAnswer">
           <ElmDivider />
+
           <div class="card">
             <ElmInlineText text="back" bold size="1.25rem" />
             <ElmJsonRenderer :json="data.back" />
           </div>
+
           <ElmDivider />
+
           <div class="card">
             <ElmInlineText text="explanation" bold size="1.25rem" />
             <ElmJsonRenderer :json="data.explanation" />
           </div>
+
+          <div class="button-container">
+            <v-btn color="rgb(233,233,233)">
+              <span style="color: black">FORGETFUL</span>
+            </v-btn>
+            <v-btn color="rgb(233,233,233)">
+              <span style="color: black">INCORRECT</span>
+            </v-btn>
+            <v-btn color="rgb(233,233,233)">
+              <span style="color: black">ALMOST</span>
+            </v-btn>
+            <v-btn color="rgb(33,33,33)">
+              <span style="color: white">LUCKY GUESS</span>
+            </v-btn>
+            <v-btn color="rgb(33,33,33)">
+              <span style="color: white">CORRECT</span>
+            </v-btn>
+            <v-btn color="rgb(33,33,33)">
+              <span style="color: white">CONFIDENT</span>
+            </v-btn>
+          </div>
         </template>
-        <v-btn @click="isShowAnswer = true">SHOW ANSWER</v-btn>
+        <v-btn v-if="!isShowAnswer" @click="isShowAnswer = true"
+          >SHOW ANSWER</v-btn
+        >
       </template>
     </div>
   </div>
@@ -58,8 +84,12 @@ const isShowAnswer = ref(false)
 }
 
 .card {
-  box-sizing: border-box;
-  padding: 0.5rem;
-  /* box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1); */
+  margin-block: 1.5rem;
+}
+
+.button-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
 }
 </style>
