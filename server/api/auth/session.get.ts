@@ -1,4 +1,4 @@
-import { validateJwtWithEvent } from '~/server/validateJwt'
+import { validateJwtWithEvent } from '~/server/validateJwtWithEvent'
 
 export default defineEventHandler(async (event) => {
   const { body } = await validateJwtWithEvent(event)
