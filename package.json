@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@elmethis/core": "1.0.0-alpha.22",
+    "@elmethis/notion-node": "1.0.0-alpha.8",
     "@mdi/font": "^7.4.47",
     "@notionhq/client": "^2.2.15",
     "argon2": "^0.41.1",
