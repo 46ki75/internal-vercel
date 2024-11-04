@@ -1,7 +1,10 @@
 <template>
   <div class="wrapper">
     <div class="vertical-container">
-      <ElmInlineText :text="`Remain: ${ankiStore.getRemainCount()}`" />
+      <ElmInlineText
+        v-if="!ankiStore.isLearnListLoading && !ankiStore.isBlockLoading"
+        :text="`Remain: ${ankiStore.remainCount}`"
+      />
 
       <ElmInlineText
         v-if="ankiStore.currentLearn"

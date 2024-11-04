@@ -29,18 +29,20 @@ interface AnkiState {
 export const useAnkiStore = defineStore('user', {
   state: (): AnkiState => ({
     learnList: [],
-    isLearnListLoading: false,
     currentLearn: null,
     block: null,
-    isBlockLoading: false,
+    isLearnListLoading: true,
+    isBlockLoading: true,
     isUpdateLoading: false,
     isShowAnswer: false
   }),
   actions: {
     async fetchLearn() {
+      this.isLearnListLoading = true
       const response = await fetch('/api/anki/learn')
       const data: Learn[] = await response.json()
       this.learnList = data
+      this.isLearnListLoading = false
       await this.next()
     },
     async next() {
@@ -129,16 +131,18 @@ export const useAnkiStore = defineStore('user', {
     },
     setIsShowAnswer(isShowAnswer: boolean) {
       this.isShowAnswer = isShowAnswer
-    },
-    getRemainCount() {
-      if (this.currentLearn != null) {
+    }
+  },
+  getters: {
+    remainCount(state) {
+      if (state.currentLearn != null) {
         const now = new Date()
-        const nextReviewAt = this.learnList.map(
+        const nextReviewAt = state.learnList.map(
           (learn) => new Date(learn.nextReviewAt)
         )
         return (
           nextReviewAt.filter((date) => date < now).length +
-          (new Date(this.currentLearn.nextReviewAt) < now ? 1 : 0)
+          (new Date(state.currentLearn.nextReviewAt) < now ? 1 : 0)
         )
       }
     }
