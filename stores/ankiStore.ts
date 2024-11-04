@@ -25,6 +25,7 @@ interface AnkiState {
   isBlockLoading: boolean
   isUpdateLoading: boolean
   isShowAnswer: boolean
+  isCreateLoading: boolean
 }
 
 export const useAnkiStore = defineStore('user', {
@@ -35,7 +36,8 @@ export const useAnkiStore = defineStore('user', {
     isLearnListLoading: true,
     isBlockLoading: true,
     isUpdateLoading: false,
-    isShowAnswer: false
+    isShowAnswer: false,
+    isCreateLoading: false
   }),
   actions: {
     async fetchLearn() {
@@ -132,6 +134,14 @@ export const useAnkiStore = defineStore('user', {
     },
     setIsShowAnswer(isShowAnswer: boolean) {
       this.isShowAnswer = isShowAnswer
+    },
+    async createNewAnkiCard() {
+      this.isCreateLoading = true
+      const data = await $fetch<{ url: string }>('/api/anki/', {
+        method: 'post'
+      })
+      this.isCreateLoading = false
+      return { url: data.url }
     }
   },
   getters: {

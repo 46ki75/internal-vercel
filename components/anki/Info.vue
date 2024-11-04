@@ -9,20 +9,19 @@
     </div>
 
     <div>
-      <ElmInlineText
-        v-if="ankiStore.currentLearn"
-        :text="ankiStore.currentLearn?.id"
-      />
-    </div>
-
-    <div>
       <v-btn
+        :loading="ankiStore.currentLearn == null"
         @click="
           open(ankiStore.currentLearn?.url.replace('https://', 'notion://'))
         "
       >
         <PencilSquareIcon class="icon" />
-        <ElmInlineText v-if="ankiStore.currentLearn" text="edit" />
+        <ElmInlineText text="edit" />
+      </v-btn>
+
+      <v-btn @click="create" :loading="ankiStore.isCreateLoading">
+        <PlusIcon class="icon" />
+        <ElmInlineText text="New" />
       </v-btn>
     </div>
   </div>
@@ -30,7 +29,7 @@
 
 <script setup lang="ts">
 import { ElmInlineText } from '@elmethis/core'
-import { PencilSquareIcon } from '@heroicons/vue/24/solid'
+import { PencilSquareIcon, PlusIcon } from '@heroicons/vue/24/solid'
 import { useAnkiStore } from '~/stores/ankiStore'
 
 const ankiStore = useAnkiStore()
@@ -38,6 +37,13 @@ const ankiStore = useAnkiStore()
 const open = (url?: string) => {
   if (url != null && window != null) {
     window.open(url, '_blank')
+  }
+}
+
+const create = async () => {
+  if (!ankiStore.isCreateLoading) {
+    const { url } = await ankiStore.createNewAnkiCard()
+    open(url)
   }
 }
 </script>
