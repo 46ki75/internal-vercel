@@ -33,12 +33,21 @@
           SHOW ANSWER
         </v-btn>
       </template>
+
+      <template v-else>
+        <ElmBlockFallback />
+      </template>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ElmDivider, ElmInlineText, ElmJsonRenderer } from '@elmethis/core'
+import {
+  ElmDivider,
+  ElmInlineText,
+  ElmJsonRenderer,
+  ElmBlockFallback
+} from '@elmethis/core'
 
 import { useAnkiStore } from '~/stores/ankiStore'
 

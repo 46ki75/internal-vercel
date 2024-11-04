@@ -1,11 +1,17 @@
 <template>
   <div>
-    <div>
-      <ElmInlineText :text="`Remain: `" bold />
-      <ElmInlineText
-        v-if="!ankiStore.isLearnListLoading && !ankiStore.isBlockLoading"
-        :text="`${ankiStore.remainCount}`"
-      />
+    <div class="text-container">
+      <span>
+        <ElmInlineText :text="`Remain: `" bold />
+        <ElmInlineText
+          v-if="!ankiStore.isLearnListLoading && !ankiStore.isBlockLoading"
+          :text="`${ankiStore.remainCount}`"
+        />
+      </span>
+      <span>
+        <ElmInlineText :text="`Queue: `" bold />
+        <ElmInlineText :text="String(ankiStore.learnList.length)" />
+      </span>
     </div>
 
     <div class="button-container">
@@ -63,6 +69,12 @@ const create = async () => {
 </script>
 
 <style scoped lang="scss">
+.text-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
 .button-container {
   margin-block: 1rem;
   display: flex;
