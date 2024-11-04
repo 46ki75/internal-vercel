@@ -1,5 +1,5 @@
 import { verify } from 'argon2'
-import { SignJWT, jwtVerify } from 'jose'
+import { SignJWT } from 'jose'
 import 'dotenv/config'
 
 export default defineEventHandler(async (event) => {
