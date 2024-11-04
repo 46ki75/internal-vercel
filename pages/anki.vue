@@ -34,14 +34,7 @@
             <ElmJsonRenderer :json="ankiStore.block.explanation" />
           </div>
 
-          <AnkiUpdate
-            v-if="ankiStore.currentLearn != null"
-            :id="ankiStore.currentLearn?.id"
-            :ease-factor="ankiStore.currentLearn?.easeFactor"
-            :repetition-count="ankiStore.currentLearn?.repetitionCount"
-            :next-review-at="ankiStore.currentLearn?.nextReviewAt"
-            v-model="ankiStore.isUpdateLoading"
-          />
+          <AnkiUpdate />
         </template>
 
         <v-btn

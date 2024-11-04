@@ -51,13 +51,14 @@
     </template>
 
     <div v-else class="fallback">
-      <ElmDotLoadingIcon v-if="ankiStore.isUpdateLoading" />
+      <ElmDotLoadingIcon />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useAnkiStore } from '~/stores/ankiStore'
+import { ElmDotLoadingIcon } from '@elmethis/core'
 
 const ankiStore = useAnkiStore()
 </script>
