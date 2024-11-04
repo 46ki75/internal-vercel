@@ -2,8 +2,8 @@
   <header class="header">
     <ElmToggleTheme />
     <ElmLoginIcon
-      :is-loading="status === 'pending'"
-      :is-login="error == null"
+      :is-loading="isLoading"
+      :is-login="!isError"
       @click="logout"
     />
   </header>
@@ -15,7 +15,24 @@ import { ElmLoginIcon, ElmToggleTheme } from '@elmethis/core'
 const router = useRouter()
 const route = useRoute()
 
-const { refresh, error, status } = useFetch('/api/auth/session')
+const isLoading = ref(false)
+const isError = ref(false)
+
+const checkSession = async () => {
+  isLoading.value = true
+  isError.value = false
+  try {
+    const response = await fetch('/api/auth/session')
+    if (!response.ok) {
+      throw new Error('You are not logged in.')
+    }
+  } catch (error) {
+    isError.value = true
+    router.push('/login')
+  } finally {
+    isLoading.value = false
+  }
+}
 
 const logout = async () => {
   try {
@@ -26,12 +43,8 @@ const logout = async () => {
   }
 }
 
-watch(
-  () => route.fullPath,
-  () => {
-    refresh()
-  }
-)
+watch(() => route.path, checkSession)
+onMounted(checkSession)
 </script>
 
 <style scoped lang="scss">
