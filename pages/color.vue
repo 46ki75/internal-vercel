@@ -1,0 +1,29 @@
+<template>
+  <div class="container">
+    <ElmColorTable :colors="colors" />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ElmColorTable } from '@elmethis/core'
+
+const colors = [
+  { name: 'crimson', code: '#c56565' },
+  { name: 'amber', code: '#d48b70' },
+  { name: 'gold', code: '#cdb57b' },
+  { name: 'emerald', code: '#59b57c' },
+  { name: 'blue', code: '#6987b8' },
+  { name: 'purple', code: '#9771bd' },
+  { name: 'pink', code: '#c9699e' },
+  { name: 'slate', code: '#868e9c' }
+]
+</script>
+
+<style scoped lang="scss">
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
