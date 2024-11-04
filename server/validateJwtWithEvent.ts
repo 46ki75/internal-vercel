@@ -1,6 +1,5 @@
 import type { EventHandlerRequest, H3Event } from 'h3'
 import { jwtVerify } from 'jose'
-import 'dotenv/config'
 
 export const validateJwtWithEvent = async (
   event: H3Event<EventHandlerRequest>

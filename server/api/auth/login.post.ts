@@ -1,6 +1,5 @@
 import { verify } from 'argon2'
 import { SignJWT } from 'jose'
-import 'dotenv/config'
 
 export default defineEventHandler(async (event) => {
   setHeader(event, 'Content-Type', 'application/json')
