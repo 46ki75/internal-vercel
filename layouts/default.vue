@@ -1,7 +1,14 @@
 <template>
   <Header />
-  <div>
-    <p>Some default layout content shared across all pages</p>
+  <main class="main">
     <slot />
-  </div>
+  </main>
 </template>
+
+<style scoped lang="scss">
+.main {
+  height: min-content;
+  margin: 0;
+  padding: 0.5rem;
+}
+</style>
