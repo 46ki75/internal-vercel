@@ -10,6 +10,7 @@ interface Learn {
   easeFactor: number
   createdAt: string
   updatedAt: string
+  url: string
 }
 
 interface AnkiState {
