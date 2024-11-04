@@ -1,6 +1,8 @@
 <template>
   <div class="wrapper">
     <div class="container">
+      <AnkiInfo />
+
       <template v-if="currentLearn != null">
         <div>{{ currentLearn }}</div>
       </template>
