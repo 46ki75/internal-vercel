@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <ElmColorTable :colors="colors" />
+    <div>
+      <ElmColorTable :colors="colors" />
+    </div>
   </div>
 </template>
 
