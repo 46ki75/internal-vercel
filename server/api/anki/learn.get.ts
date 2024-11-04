@@ -1,6 +1,16 @@
 import { Client } from '@notionhq/client'
 import { validateJwtWithEvent } from '~/server/validateJwtWithEvent'
 
+interface Learn {
+  id: string
+  nextReviewAt: string
+  tags: Array<{ id: string; name: string; color: string }>
+  repetitionCount: string
+  easeFactor: string
+  createdAt: string
+  updatedAt: string
+}
+
 export default defineEventHandler(async (event) => {
   const { body, isValid } = await validateJwtWithEvent(event)
   if (!isValid) return body
@@ -63,7 +73,7 @@ export default defineEventHandler(async (event) => {
       return {
         id: result.id,
         nextReviewAt: result.properties.nextReviewAt.date.start,
-        tags: result.properties.tags,
+        tags: result.properties.tags.multi_select,
         repetitionCount: result.properties.repetitionCount.number,
         easeFactor: result.properties.easeFactor.number,
         createdAt: result.created_time,

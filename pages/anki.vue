@@ -1,24 +1,28 @@
 <template>
   <div class="wrapper">
     <div class="container">
-      <template v-if="data != null">
+      <template v-if="currentLearn != null">
+        <div>{{ currentLearn }}</div>
+      </template>
+
+      <template v-if="block != null">
         <div class="card">
           <ElmInlineText text="front" bold size="1.25rem" />
-          <ElmJsonRenderer :json="data.front" />
+          <ElmJsonRenderer :json="block.front" />
         </div>
         <template v-if="isShowAnswer">
           <ElmDivider />
 
           <div class="card">
             <ElmInlineText text="back" bold size="1.25rem" />
-            <ElmJsonRenderer :json="data.back" />
+            <ElmJsonRenderer :json="block.back" />
           </div>
 
           <ElmDivider />
 
           <div class="card">
             <ElmInlineText text="explanation" bold size="1.25rem" />
-            <ElmJsonRenderer :json="data.explanation" />
+            <ElmJsonRenderer :json="block.explanation" />
           </div>
 
           <div class="button-container">
@@ -42,9 +46,9 @@
             </v-btn>
           </div>
         </template>
-        <v-btn v-if="!isShowAnswer" @click="isShowAnswer = true"
-          >SHOW ANSWER</v-btn
-        >
+        <v-btn v-if="!isShowAnswer" @click="isShowAnswer = true">
+          SHOW ANSWER
+        </v-btn>
       </template>
     </div>
   </div>
@@ -58,11 +62,40 @@ import {
   type ElmJsonRendererProps
 } from '@elmethis/core'
 
-const { data, status } = useFetch<{
+interface Learn {
+  id: string
+  nextReviewAt: string
+  tags: Array<{ id: string; name: string; color: string }>
+  repetitionCount: string
+  easeFactor: string
+  createdAt: string
+  updatedAt: string
+}
+
+const learnList = ref<Learn[]>([])
+const currentLearn = ref<Learn | null>(null)
+const block = ref<{
   front: ElmJsonRendererProps['json']
   back: ElmJsonRendererProps['json']
   explanation: ElmJsonRendererProps['json']
-}>('/api/anki/block/13334608d5c981d3a307e75f2673e306')
+} | null>(null)
+
+const fetchLearn = async () => {
+  const response = await fetch('/api/anki/learn')
+  const data: Learn[] = await response.json()
+  learnList.value = data
+  currentLearn.value = data.shift() ?? null
+  if (currentLearn.value != null) {
+    await fetchBlock(currentLearn.value.id)
+  }
+}
+
+onMounted(fetchLearn)
+
+const fetchBlock = async (id: string) => {
+  const response = await fetch(`/api/anki/block/${id}`)
+  block.value = await response.json()
+}
 
 const isShowAnswer = ref(false)
 </script>
