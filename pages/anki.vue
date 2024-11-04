@@ -1,10 +1,17 @@
 <template>
   <div class="wrapper">
-    <div class="container">
+    <div class="vertical-container">
       <AnkiInfo />
 
       <template v-if="currentLearn != null">
-        <div>{{ currentLearn }}</div>
+        <AnkiTags
+          :tags="
+            currentLearn.tags.map((tag) => ({
+              text: tag.name,
+              color: tag.color
+            }))
+          "
+        />
       </template>
 
       <template v-if="block != null">
@@ -110,12 +117,20 @@ const isShowAnswer = ref(false)
   align-items: center;
 }
 
-.container {
+.vertical-container {
   width: 100%;
   max-width: 800px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.tag-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 0.5rem;
 }
 
 .card {
