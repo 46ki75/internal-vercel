@@ -1,5 +1,7 @@
 <template>
-  <div class="bookmark-vartical-container">
+  <ElmBlockFallback v-if="bookmarkStore.isLoading" />
+
+  <div v-else class="bookmark-vartical-container">
     <div v-for="tag in bookmarkStore.getBookmarkTags">
       <ElmTag :text="tag.name" />
       <div class="bookmark-horizontal-container">
@@ -18,7 +20,7 @@
 
 <script setup lang="ts">
 import { useBookmarkStore } from '~/stores/bookmarkStore'
-import { ElmBookmarkIcon, ElmTag } from '@elmethis/core'
+import { ElmBlockFallback, ElmBookmarkIcon, ElmTag } from '@elmethis/core'
 
 const bookmarkStore = useBookmarkStore()
 
