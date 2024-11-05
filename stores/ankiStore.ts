@@ -27,7 +27,7 @@ interface AnkiState {
   isCreateLoading: boolean
 }
 
-export const useAnkiStore = defineStore('user', {
+export const useAnkiStore = defineStore('anki', {
   state: (): AnkiState => ({
     learnList: [],
     currentLearn: null,
