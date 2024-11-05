@@ -67,12 +67,23 @@ export default defineEventHandler(async (event) => {
         )
       }
 
+      if (!('icon' in page)) {
+        setResponseStatus(event, 500)
+        throw new Error('icon is not in page')
+      }
+
       return {
         name: page.properties.name.title
           .map((text) => text.plain_text)
           .join(''),
         url: page.properties.url.url,
-        tags: page.properties.tags.multi_select
+        tags: page.properties.tags.multi_select,
+        favicon:
+          page.icon?.type === 'file'
+            ? page.icon.file.url
+            : page.icon?.type === 'external'
+              ? page.icon.external.url
+              : null
       }
     })
 

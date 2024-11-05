@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@elmethis/core':
-        specifier: 1.0.0-alpha.28
-        version: 1.0.0-alpha.28
+        specifier: 1.0.0-alpha.29
+        version: 1.0.0-alpha.29
       '@elmethis/notion-node':
         specifier: 1.0.0-alpha.9
         version: 1.0.0-alpha.9
@@ -29,6 +29,9 @@ importers:
       jose:
         specifier: ^5.9.6
         version: 5.9.6
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
       nuxt:
         specifier: ^3.13.2
         version: 3.13.2(@parcel/watcher@2.4.1)(@types/node@22.8.7)(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.24.3)(sass@1.80.6)(terser@5.36.0)(typescript@5.6.3)(vite@5.4.10(@types/node@22.8.7)(sass@1.80.6)(terser@5.36.0))
@@ -45,6 +48,9 @@ importers:
         specifier: latest
         version: 4.4.5(vue@3.5.12(typescript@5.6.3))
     devDependencies:
+      '@types/lodash-es':
+        specifier: ^4.17.12
+        version: 4.17.12
       h3:
         specifier: ^1.13.0
         version: 1.13.0
@@ -215,8 +221,8 @@ packages:
     resolution: {integrity: sha512-YLPHc8yASwjNkmcDMQMY35yiWjoKAKnhUbPRszBRS0YgH+IXtsMp61j+yTcnCE3oO2DgP0U3iejLC8FTtKDC8Q==}
     engines: {node: '>=16.13'}
 
-  '@elmethis/core@1.0.0-alpha.28':
-    resolution: {integrity: sha512-Tpmfm5WgCll5F2Jtt8Qyu2RA8hER9Jk+p+6yrLJ1nA3JfkM+nYgH4wnGjWO8xS0+tKfgmzpU4qpXfB2et8ooEQ==}
+  '@elmethis/core@1.0.0-alpha.29':
+    resolution: {integrity: sha512-fLPtAOj6lZsbCGau+19cTJvFJHxYd1hZ4URa3rBHjPcuQdqfVghqVIdtN3apRnDyrcEsQCCl5BK4LiVWCm/cvg==}
 
   '@elmethis/notion-node@1.0.0-alpha.9':
     resolution: {integrity: sha512-C5ABkjFuvh2fiTKrjBlSog0xTkLAUfVCfQ3YdL3/nVAPpwwtKxOnqvalHSZW5GbmLFFosI+rMUTZURzjkS9tGg==}
@@ -1048,6 +1054,12 @@ packages:
 
   '@types/http-proxy@1.17.15':
     resolution: {integrity: sha512-25g5atgiVNTIv0LBDTg1H74Hvayx0ajtJPLLcYE3whFv75J0pWNtOBzaXJQgDTmrX1bx5U9YC2w/n65BN1HwRQ==}
+
+  '@types/lodash-es@4.17.12':
+    resolution: {integrity: sha512-0NgftHUcV4v34VhXm8QBSftKVXtbkBG3ViCjs6+eJ5a6y6Mi/jiFGPc1sC7QK+9BFhWrURE3EOggmWaSxL9OzQ==}
+
+  '@types/lodash@4.17.13':
+    resolution: {integrity: sha512-lfx+dftrEZcdBPczf9d0Qv0x+j/rfNCMuC6OcfXmO8gkfeNAY88PgKUbvG56whcN23gc27yenwF6oJZXGFpYxg==}
 
   '@types/node-fetch@2.6.11':
     resolution: {integrity: sha512-24xFj9R5+rfQJLRyM56qh+wnVSYhyXC2tkoBndtY0U+vubqNsYXGjufB2nn8Q6gt0LrARwL6UBtMCSVCwl4B1g==}
@@ -2165,6 +2177,9 @@ packages:
   local-pkg@0.5.0:
     resolution: {integrity: sha512-ok6z3qlYyCDS4ZEU27HaU6x/xZa9Whf8jD4ptH5UZTQYZVYeb9bnZ3ojVhiJNLiXK1Hfc0GNbLXcmZ5plLDDBg==}
     engines: {node: '>=14'}
+
+  lodash-es@4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
 
   lodash.defaults@4.2.0:
     resolution: {integrity: sha512-qjxPLHd3r5DnsdGacqOMU6pb/avJzdh9tFX2ymgoZE27BmjXrNy/y4LoaiTeAb+O3gL8AfpJGtqfX/ae2leYYQ==}
@@ -3659,7 +3674,7 @@ snapshots:
     dependencies:
       mime: 3.0.0
 
-  '@elmethis/core@1.0.0-alpha.28': {}
+  '@elmethis/core@1.0.0-alpha.29': {}
 
   '@elmethis/notion-node@1.0.0-alpha.9':
     dependencies:
@@ -4412,6 +4427,12 @@ snapshots:
   '@types/http-proxy@1.17.15':
     dependencies:
       '@types/node': 22.8.7
+
+  '@types/lodash-es@4.17.12':
+    dependencies:
+      '@types/lodash': 4.17.13
+
+  '@types/lodash@4.17.13': {}
 
   '@types/node-fetch@2.6.11':
     dependencies:
@@ -5685,6 +5706,8 @@ snapshots:
     dependencies:
       mlly: 1.7.2
       pkg-types: 1.2.1
+
+  lodash-es@4.17.21: {}
 
   lodash.defaults@4.2.0: {}
 
