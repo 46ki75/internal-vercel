@@ -1,5 +1,7 @@
 <template>
-  <ElmBlockFallback v-if="bookmarkStore.isLoading" />
+  <ElmBlockFallback
+    v-if="bookmarkStore.bookmarks.length == 0 && bookmarkStore.isLoading"
+  />
 
   <div v-else class="bookmark-vartical-container">
     <div v-for="tag in bookmarkStore.getBookmarkTags">
