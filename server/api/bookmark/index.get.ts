@@ -29,7 +29,54 @@ export default defineEventHandler(async (event) => {
       filter: { property: 'type', select: { equals: 'Bookmark' } }
     })
 
-    return bookmarks
+    const results = bookmarks.results.map((page) => {
+      if (!('properties' in page)) {
+        setResponseStatus(event, 500)
+        throw new Error('properties is not in page')
+      }
+
+      if (!('url' in page.properties)) {
+        setResponseStatus(event, 500)
+        throw new Error('url is not in page or type of url is not url')
+      }
+
+      if (page.properties.url.type !== 'url') {
+        setResponseStatus(event, 500)
+        throw new Error('url is not in page or type of url is not url')
+      }
+
+      if (!('name' in page.properties)) {
+        setResponseStatus(event, 500)
+        throw new Error('name is not in page')
+      }
+
+      if (page.properties.name.type !== 'title') {
+        setResponseStatus(event, 500)
+        throw new Error('name is not in page or type of name is not title')
+      }
+
+      if (!('tags' in page.properties)) {
+        setResponseStatus(event, 500)
+        throw new Error('tags is not in page')
+      }
+
+      if (page.properties.tags.type !== 'multi_select') {
+        setResponseStatus(event, 500)
+        throw new Error(
+          'tags is not in page or type of tags is not multi_select'
+        )
+      }
+
+      return {
+        name: page.properties.name.title
+          .map((text) => text.plain_text)
+          .join(''),
+        url: page.properties.url.url,
+        tags: page.properties.tags.multi_select
+      }
+    })
+
+    return results
   } catch {
     setResponseStatus(event, 500)
     return { error: 'Internal server error' }
