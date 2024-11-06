@@ -5,6 +5,8 @@ interface TranslateState {
   isError: boolean
   text?: string
   result?: Translate
+  count?: number
+  limit?: number
 }
 
 type Languages = 'ja' | 'en-US'
@@ -20,7 +22,9 @@ export const useTranslateStore = defineStore('translate', {
     isLoading: false,
     isError: false,
     text: undefined,
-    result: undefined
+    result: undefined,
+    count: undefined,
+    limit: undefined
   }),
   actions: {
     async fetchTranslate(): Promise<void> {
@@ -38,11 +42,23 @@ export const useTranslateStore = defineStore('translate', {
           }
         })
         this.result = response
+        this.fetchUsage()
       } catch {
         this.isError = true
       } finally {
         this.isLoading = false
       }
+    },
+    async fetchUsage(): Promise<void> {
+      const result = await $fetch<{
+        count: number
+        limit: number
+      }>('/api/translate')
+
+      console.log(result)
+
+      this.count = result.count
+      this.limit = result.limit
     },
     setText(text: string) {
       this.text = text
