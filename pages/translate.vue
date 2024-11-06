@@ -17,5 +17,6 @@
 .container {
   width: 800px;
   max-width: 100%;
+  margin-block: 1rem;
 }
 </style>
