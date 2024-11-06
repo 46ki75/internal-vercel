@@ -4,7 +4,7 @@
       <span>
         <ElmInlineText :text="`Remain: `" bold />
         <ElmInlineText
-          v-if="ankiStore.remainCount"
+          v-if="ankiStore.remainCount != null"
           :text="`${ankiStore.remainCount}`"
         />
       </span>
