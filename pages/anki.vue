@@ -1,6 +1,10 @@
 <template>
   <div class="container">
     <div class="vertical-container">
+      <ElmToggle summary="Translate Tools" :style="{ marginBlock: '1rem' }">
+        <Translate />
+      </ElmToggle>
+
       <AnkiInfo />
 
       <template v-if="ankiStore.block != null">
@@ -43,6 +47,7 @@
 
 <script setup lang="ts">
 import {
+  ElmToggle,
   ElmDivider,
   ElmInlineText,
   ElmJsonRenderer,
