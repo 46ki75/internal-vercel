@@ -1,102 +1,69 @@
 <template>
-  <div class="button-container">
-    <template v-if="!ankiStore.isUpdateLoading">
-      <!-- <v-btn
-        color="rgb(233,233,233)"
+  <template v-if="!ankiStore.isUpdateLoading">
+    <div class="button-container">
+      <ElmButton
+        block
         @click="ankiStore.updateAnkiCard(0)"
         :loading="ankiStore.isUpdateLoading"
       >
-        <span style="color: black">FORGETFUL</span>
-      </v-btn>
+        <XMarkIcon :style="{ width: 16 }" />
+        <span>FORGETFUL</span>
+      </ElmButton>
 
-      <v-btn
-        color="rgb(233,233,233)"
+      <ElmButton
+        block
         @click="ankiStore.updateAnkiCard(1)"
         :loading="ankiStore.isUpdateLoading"
       >
-        <span style="color: black">INCORRECT</span>
-      </v-btn>
+        <XMarkIcon :style="{ width: 16 }" />
+        <span>INCORRECT</span>
+      </ElmButton>
 
-      <v-btn
-        color="rgb(233,233,233)"
+      <ElmButton
+        block
         @click="ankiStore.updateAnkiCard(2)"
         :loading="ankiStore.isUpdateLoading"
       >
-        <span style="color: black">ALMOST</span>
-      </v-btn>
-
-      <v-btn
-        color="rgb(33,33,33)"
-        @click="ankiStore.updateAnkiCard(3)"
-        :loading="ankiStore.isUpdateLoading"
-      >
-        <span style="color: white">LUCKY GUESS</span>
-      </v-btn>
-
-      <v-btn
-        color="rgb(33,33,33)"
-        @click="ankiStore.updateAnkiCard(4)"
-        :loading="ankiStore.isUpdateLoading"
-      >
-        <span style="color: white">CORRECT</span>
-      </v-btn>
-
-      <v-btn
-        color="rgb(33,33,33)"
-        @click="ankiStore.updateAnkiCard(5)"
-        :loading="ankiStore.isUpdateLoading"
-      >
-        <span style="color: white">CONFIDENT</span>
-      </v-btn> -->
-
-      <ElmButton
-        @click="ankiStore.updateAnkiCard(0)"
-        :loading="ankiStore.isUpdateLoading"
-        >FORGETFUL
+        <XMarkIcon :style="{ width: 16 }" />
+        <span>ALMOST</span>
       </ElmButton>
-
-      <ElmButton
-        color="rgb(233,233,233)"
-        @click="ankiStore.updateAnkiCard(1)"
-        :loading="ankiStore.isUpdateLoading"
-      >
-        INCORRECT
-      </ElmButton>
-
-      <ElmButton
-        color="rgb(233,233,233)"
-        @click="ankiStore.updateAnkiCard(2)"
-        :loading="ankiStore.isUpdateLoading"
-      >
-        ALMOST
-      </ElmButton>
-
-      <ElmButton
-        color="rgb(33,33,33)"
-        @click="ankiStore.updateAnkiCard(3)"
-        :loading="ankiStore.isUpdateLoading"
-      >
-        LUCKY
-      </ElmButton>
-
-      <ElmButton
-        color="rgb(33,33,33)"
-        @click="ankiStore.updateAnkiCard(4)"
-        :loading="ankiStore.isUpdateLoading"
-        >CORRECT
-      </ElmButton>
-
-      <ElmButton
-        color="rgb(33,33,33)"
-        @click="ankiStore.updateAnkiCard(5)"
-        :loading="ankiStore.isUpdateLoading"
-        >CONFIDENT
-      </ElmButton>
-    </template>
-
-    <div v-else class="fallback">
-      <ElmDotLoadingIcon />
     </div>
+
+    <div class="button-container">
+      <ElmButton
+        block
+        primary
+        @click="ankiStore.updateAnkiCard(3)"
+        :loading="ankiStore.isUpdateLoading"
+      >
+        <CheckIcon :style="{ width: 16 }" />
+        <span>LUCKY</span>
+      </ElmButton>
+
+      <ElmButton
+        block
+        primary
+        @click="ankiStore.updateAnkiCard(4)"
+        :loading="ankiStore.isUpdateLoading"
+      >
+        <CheckIcon :style="{ width: 16 }" />
+        <span>CORRECT</span>
+      </ElmButton>
+
+      <ElmButton
+        block
+        primary
+        @click="ankiStore.updateAnkiCard(5)"
+        :loading="ankiStore.isUpdateLoading"
+      >
+        <CheckIcon :style="{ width: 16 }" />
+        <span>CONFIDENT</span>
+      </ElmButton>
+    </div>
+  </template>
+
+  <div v-else class="fallback">
+    <ElmDotLoadingIcon />
   </div>
 
   <div class="margin"></div>
@@ -105,6 +72,7 @@
 <script setup lang="ts">
 import { useAnkiStore } from '~/stores/ankiStore'
 import { ElmButton, ElmDotLoadingIcon } from '@elmethis/core'
+import { CheckIcon, XMarkIcon } from '@heroicons/vue/24/solid'
 
 const ankiStore = useAnkiStore()
 </script>
@@ -112,7 +80,7 @@ const ankiStore = useAnkiStore()
 <style scoped lang="scss">
 .button-container {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   justify-content: center;
 }
 
