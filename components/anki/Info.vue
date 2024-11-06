@@ -63,7 +63,7 @@ const open = (url?: string) => {
 const create = async () => {
   if (!ankiStore.isCreateLoading) {
     const { url } = await ankiStore.createNewAnkiCard()
-    open(url)
+    open(url.replace('https://', 'notion://'))
   }
 }
 </script>
