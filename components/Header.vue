@@ -1,9 +1,18 @@
 <template>
   <header class="header">
     <div class="icon-container">
-      <HomeIcon class="icon" @click="$router.push('/')" />
-      <TagIcon class="icon" @click="$router.push('/anki')" />
-      <SwatchIcon class="icon" @click="$router.push('/color')" />
+      <NuxtLink to="/" class="icon">
+        <HomeIcon class="icon" />
+      </NuxtLink>
+      <NuxtLink to="/anki" class="icon">
+        <TagIcon class="icon" />
+      </NuxtLink>
+      <NuxtLink to="/translate" class="icon">
+        <LanguageIcon />
+      </NuxtLink>
+      <NuxtLink to="/color" class="anki">
+        <SwatchIcon class="icon" />
+      </NuxtLink>
     </div>
 
     <div class="icon-container">
@@ -24,7 +33,12 @@
 
 <script setup lang="ts">
 import { ElmLoginIcon, ElmToggleTheme } from '@elmethis/core'
-import { HomeIcon, SwatchIcon, TagIcon } from '@heroicons/vue/24/solid'
+import {
+  HomeIcon,
+  LanguageIcon,
+  SwatchIcon,
+  TagIcon
+} from '@heroicons/vue/24/solid'
 
 import { useAuthStore } from '~/stores/authStore'
 
@@ -59,8 +73,11 @@ onMounted(checkSession)
     gap: 0.5rem;
 
     .icon {
+      all: unset;
       padding: 2px;
       width: 24px;
+      height: 24px;
+      border-radius: 0.25rem;
       transition: background-color 200ms;
       cursor: pointer;
 

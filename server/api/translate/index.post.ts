@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
 
     if (typeof text !== 'string') {
       setResponseStatus(event, 400)
-      return { error: 'Invalid Japanese text' }
+      return { error: 'Invalid text' }
     }
 
     if (!(sourceLanguage !== 'ja' || sourceLanguage !== 'en-US')) {
