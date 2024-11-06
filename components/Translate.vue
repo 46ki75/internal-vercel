@@ -11,7 +11,7 @@
       :style="{ opacity: 0.5 }"
     />
   </div>
-  <div :style="{ marginBlock: '1rem' }">
+  <div :style="{ marginBlock: '2rem' }">
     <ElmProgress
       v-if="translateStore.count && translateStore.limit"
       :value="translateStore.count"
@@ -20,14 +20,17 @@
     />
   </div>
 
-  <v-textarea label="Japanese" v-model="text"></v-textarea>
-  <v-btn
-    :loading="translateStore.isLoading"
+  <ElmParagraph>
+    <v-textarea label="Japanese" v-model="text" variant="outlined"></v-textarea>
+  </ElmParagraph>
+
+  <ElmButton
     block
+    :loading="translateStore.isLoading"
     @click="translateStore.fetchTranslate"
   >
     TRANSLATE
-  </v-btn>
+  </ElmButton>
 
   <ElmCodeBlock
     v-if="translateStore.result"
@@ -37,7 +40,13 @@
 </template>
 
 <script setup lang="ts">
-import { ElmCodeBlock, ElmInlineText, ElmProgress } from '@elmethis/core'
+import {
+  ElmCodeBlock,
+  ElmInlineText,
+  ElmParagraph,
+  ElmProgress,
+  ElmButton
+} from '@elmethis/core'
 
 import { useTranslateStore } from '~/stores/translateStore'
 
