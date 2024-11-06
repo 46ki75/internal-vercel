@@ -30,12 +30,12 @@
           <AnkiUpdate />
         </template>
 
-        <v-btn
+        <ElmButton
           v-if="!ankiStore.isShowAnswer"
           @click="ankiStore.setIsShowAnswer(true)"
         >
           SHOW ANSWER
-        </v-btn>
+        </ElmButton>
       </template>
 
       <template v-else>
@@ -51,7 +51,8 @@ import {
   ElmDivider,
   ElmInlineText,
   ElmJsonRenderer,
-  ElmBlockFallback
+  ElmBlockFallback,
+  ElmButton
 } from '@elmethis/core'
 
 import { useAnkiStore } from '~/stores/ankiStore'

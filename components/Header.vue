@@ -81,6 +81,13 @@ onMounted(checkSession)
       transition: background-color 200ms;
       cursor: pointer;
 
+      color: rgba(black, 0.7);
+      fill: rgba(black, 0.7);
+      [data-theme='dark'] & {
+        color: rgba(white, 0.7);
+        fill: rgba(white, 0.7);
+      }
+
       &:hover {
         background-color: rgba(black, 0.1);
         [data-theme='dark'] & {

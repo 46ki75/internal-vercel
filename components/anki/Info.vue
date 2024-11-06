@@ -15,20 +15,21 @@
     </div>
 
     <div class="button-container">
-      <v-btn
+      <ElmButton
         :loading="ankiStore.currentLearn == null"
         @click="
           open(ankiStore.currentLearn?.url.replace('https://', 'notion://'))
         "
+        block
       >
         <PencilSquareIcon class="icon" />
         <ElmInlineText text="edit" />
-      </v-btn>
+      </ElmButton>
 
-      <v-btn @click="create" :loading="ankiStore.isCreateLoading">
+      <ElmButton @click="create" :loading="ankiStore.isCreateLoading" block>
         <PlusIcon class="icon" />
         <ElmInlineText text="New" />
-      </v-btn>
+      </ElmButton>
     </div>
 
     <template v-if="ankiStore.currentLearn != null">
@@ -48,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import { ElmInlineText, ElmBlockFallback } from '@elmethis/core'
+import { ElmInlineText, ElmBlockFallback, ElmButton } from '@elmethis/core'
 import { PencilSquareIcon, PlusIcon } from '@heroicons/vue/24/solid'
 import { useAnkiStore } from '~/stores/ankiStore'
 
@@ -84,5 +85,6 @@ const create = async () => {
 
 .icon {
   width: 16px;
+  height: 16px;
 }
 </style>
