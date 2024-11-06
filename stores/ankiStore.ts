@@ -14,17 +14,15 @@ interface Learn {
 
 interface AnkiState {
   learnList: Learn[]
-  isLearnListLoading: boolean
   currentLearn: Learn | null
   block: {
     front: ElmJsonRendererProps['json']
     back: ElmJsonRendererProps['json']
     explanation: ElmJsonRendererProps['json']
   } | null
-  isBlockLoading: boolean
   isUpdateLoading: boolean
-  isShowAnswer: boolean
   isCreateLoading: boolean
+  isShowAnswer: boolean
 }
 
 export const useAnkiStore = defineStore('anki', {
@@ -32,19 +30,15 @@ export const useAnkiStore = defineStore('anki', {
     learnList: [],
     currentLearn: null,
     block: null,
-    isLearnListLoading: true,
-    isBlockLoading: true,
     isUpdateLoading: false,
-    isShowAnswer: false,
-    isCreateLoading: false
+    isCreateLoading: false,
+    isShowAnswer: false
   }),
   actions: {
     async fetchLearn() {
-      this.isLearnListLoading = true
       const response = await fetch('/api/anki/learn')
       const data: Learn[] = await response.json()
       this.learnList = data
-      this.isLearnListLoading = false
       await this.next()
     },
     async next() {
@@ -60,10 +54,8 @@ export const useAnkiStore = defineStore('anki', {
       }
     },
     async fetchBlock(id: string) {
-      this.isBlockLoading = true
       const response = await fetch(`/api/anki/block/${id}`)
       this.block = await response.json()
-      this.isBlockLoading = false
     },
     async updateAnkiCard(performanceRating: 0 | 1 | 2 | 3 | 4 | 5) {
       if (this.currentLearn == null) {

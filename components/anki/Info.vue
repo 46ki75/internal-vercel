@@ -4,7 +4,7 @@
       <span>
         <ElmInlineText :text="`Remain: `" bold />
         <ElmInlineText
-          v-if="!ankiStore.isLearnListLoading && !ankiStore.isBlockLoading"
+          v-if="ankiStore.remainCount"
           :text="`${ankiStore.remainCount}`"
         />
       </span>
