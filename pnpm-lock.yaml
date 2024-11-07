@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@elmethis/core':
-        specifier: 1.0.0-alpha.40
-        version: 1.0.0-alpha.40
+        specifier: 1.0.0-alpha.43
+        version: 1.0.0-alpha.43
       '@elmethis/notion-node':
-        specifier: 1.0.0-alpha.9
-        version: 1.0.0-alpha.9
+        specifier: 1.0.0-alpha.10
+        version: 1.0.0-alpha.10
       '@heroicons/vue':
         specifier: ^2.1.5
         version: 2.1.5(vue@3.5.12(typescript@5.6.3))
@@ -224,11 +224,11 @@ packages:
     resolution: {integrity: sha512-YLPHc8yASwjNkmcDMQMY35yiWjoKAKnhUbPRszBRS0YgH+IXtsMp61j+yTcnCE3oO2DgP0U3iejLC8FTtKDC8Q==}
     engines: {node: '>=16.13'}
 
-  '@elmethis/core@1.0.0-alpha.40':
-    resolution: {integrity: sha512-jFaiFss8Va1y2uckiUFXpvumKbjFeVDHii1GtpQh+AEXSp3dKWktjnzGM5bsvT+zhfXpJXCzLtmXmwbVibNadw==}
+  '@elmethis/core@1.0.0-alpha.43':
+    resolution: {integrity: sha512-HOzDf4xxaDHQy8pyWys3lc/HlMSooB9EJ41HJRZuFaWlY4hyrmlcO5/jUQeKF3qnfSrhXfYF+0ObzVpTh4RpiQ==}
 
-  '@elmethis/notion-node@1.0.0-alpha.9':
-    resolution: {integrity: sha512-C5ABkjFuvh2fiTKrjBlSog0xTkLAUfVCfQ3YdL3/nVAPpwwtKxOnqvalHSZW5GbmLFFosI+rMUTZURzjkS9tGg==}
+  '@elmethis/notion-node@1.0.0-alpha.10':
+    resolution: {integrity: sha512-vZuc92gTkDt9EFJFoo2jJO1quSe6xLMoEbxzPeqQFgW7LONnGLR8Sf8UlVOPslsCsL+k0NOMfBoP6bbohn+utg==}
 
   '@esbuild/aix-ppc64@0.21.5':
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
@@ -3704,9 +3704,9 @@ snapshots:
     dependencies:
       mime: 3.0.0
 
-  '@elmethis/core@1.0.0-alpha.40': {}
+  '@elmethis/core@1.0.0-alpha.43': {}
 
-  '@elmethis/notion-node@1.0.0-alpha.9':
+  '@elmethis/notion-node@1.0.0-alpha.10':
     dependencies:
       '@notionhq/client': 2.2.15
       open-graph-scraper: 6.8.2

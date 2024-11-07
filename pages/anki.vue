@@ -8,7 +8,7 @@
       <AnkiInfo />
 
       <template v-if="ankiStore.block != null">
-        <div class="card">
+        <div class="card" v-if="!ankiStore.isBlockLoading">
           <ElmInlineText text="front" bold size="1.25rem" />
           <ElmJsonRenderer :json="ankiStore.block.front" />
         </div>
@@ -31,7 +31,7 @@
         </template>
 
         <ElmButton
-          v-if="!ankiStore.isShowAnswer"
+          v-if="!ankiStore.isShowAnswer && !ankiStore.isBlockLoading"
           @click="ankiStore.setIsShowAnswer(true)"
         >
           SHOW ANSWER
@@ -60,7 +60,7 @@ import { useAnkiStore } from '~/stores/ankiStore'
 const ankiStore = useAnkiStore()
 
 onMounted(ankiStore.fetchLearn)
-watch(() => ankiStore.isUpdateLoading, ankiStore.next)
+// watch(() => ankiStore.isUpdateLoading, ankiStore.next)
 </script>
 
 <style scoped lang="scss">

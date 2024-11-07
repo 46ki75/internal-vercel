@@ -13,8 +13,8 @@
   </div>
   <div :style="{ marginBlock: '2rem' }">
     <ElmProgress
-      v-if="translateStore.count && translateStore.limit"
-      :value="translateStore.count"
+      :loading="!(translateStore.count && translateStore.limit)"
+      :value="translateStore.count ?? 0"
       :max="translateStore.limit"
       weight="4px"
     />

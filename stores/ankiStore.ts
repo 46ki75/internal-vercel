@@ -20,6 +20,7 @@ interface AnkiState {
     back: ElmJsonRendererProps['json']
     explanation: ElmJsonRendererProps['json']
   } | null
+  isBlockLoading: boolean
   isUpdateLoading: boolean
   isCreateLoading: boolean
   isShowAnswer: boolean
@@ -30,6 +31,7 @@ export const useAnkiStore = defineStore('anki', {
     learnList: [],
     currentLearn: null,
     block: null,
+    isBlockLoading: false,
     isUpdateLoading: false,
     isCreateLoading: false,
     isShowAnswer: false
@@ -54,8 +56,10 @@ export const useAnkiStore = defineStore('anki', {
       }
     },
     async fetchBlock(id: string) {
+      this.isBlockLoading = true
       const response = await fetch(`/api/anki/block/${id}`)
       this.block = await response.json()
+      this.isBlockLoading = false
     },
     async updateAnkiCard(performanceRating: 0 | 1 | 2 | 3 | 4 | 5) {
       if (this.currentLearn == null) {
@@ -121,6 +125,7 @@ export const useAnkiStore = defineStore('anki', {
         this.currentLearn = null
         this.isShowAnswer = false
         this.isUpdateLoading = false
+        this.next()
       }
     },
     setIsShowAnswer(isShowAnswer: boolean) {
