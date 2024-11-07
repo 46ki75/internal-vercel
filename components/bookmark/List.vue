@@ -1,23 +1,25 @@
 <template>
-  <ElmBlockFallback
-    v-if="bookmarkStore.bookmarks.length == 0 && bookmarkStore.isFetchLoading"
-  />
+  <transition mode="out-in">
+    <ElmBlockFallback
+      v-if="bookmarkStore.bookmarks.length == 0 && bookmarkStore.isFetchLoading"
+    />
 
-  <div v-else class="bookmark-vartical-container">
-    <div v-for="tag in bookmarkStore.getBookmarkTags">
-      <ElmTag :text="tag.name" />
-      <div class="bookmark-horizontal-container">
-        <template v-for="bookmark in bookmarkStore.bookmarks">
-          <ElmBookmarkIcon
-            v-if="bookmark.tags.some((t) => t.id === tag.id)"
-            :href="bookmark.url"
-            :name="bookmark.name"
-            :favicon="bookmark.favicon"
-          />
-        </template>
+    <div v-else class="bookmark-vartical-container">
+      <div v-for="tag in bookmarkStore.getBookmarkTags">
+        <ElmTag :text="tag.name" />
+        <div class="bookmark-horizontal-container">
+          <template v-for="bookmark in bookmarkStore.bookmarks">
+            <ElmBookmarkIcon
+              v-if="bookmark.tags.some((t) => t.id === tag.id)"
+              :href="bookmark.url"
+              :name="bookmark.name"
+              :favicon="bookmark.favicon"
+            />
+          </template>
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script setup lang="ts">
@@ -43,5 +45,20 @@ onMounted(bookmarkStore.fetchBookmarks)
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+.v-enter-to,
+.v-leave-from {
+  opacity: 1;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 300ms;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
