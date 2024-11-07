@@ -1,24 +1,6 @@
 <template>
   <div class="wrapper">
-    <ElmBlockFallback
-      v-if="bookmarkStore.bookmarks.length == 0 && bookmarkStore.isFetchLoading"
-    />
-
-    <div v-else class="bookmark-vartical-container">
-      <div v-for="tag in bookmarkStore.getBookmarkTags">
-        <ElmTag :text="tag.name" />
-        <div class="bookmark-horizontal-container">
-          <template v-for="bookmark in bookmarkStore.bookmarks">
-            <ElmBookmarkIcon
-              v-if="bookmark.tags.some((t) => t.id === tag.id)"
-              :href="bookmark.url"
-              :name="bookmark.name"
-              :favicon="bookmark.favicon"
-            />
-          </template>
-        </div>
-      </div>
-    </div>
+    <BookmarkList />
 
     <BookmarkCreate />
 
@@ -28,7 +10,6 @@
 
 <script setup lang="ts">
 import { useBookmarkStore } from '~/stores/bookmarkStore'
-import { ElmBlockFallback, ElmBookmarkIcon, ElmTag } from '@elmethis/core'
 
 const bookmarkStore = useBookmarkStore()
 
