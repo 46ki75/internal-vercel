@@ -2,9 +2,11 @@ import { defineStore } from 'pinia'
 import { uniqBy } from 'lodash-es'
 
 interface BookmarkState {
-  isLoading: boolean
-  isError: boolean
+  isFetchLoading: boolean
+  isFetchError: boolean
   bookmarks: Bookmark[]
+  isCreateLoading: boolean
+  isCreateError: boolean
 }
 
 interface Bookmark {
@@ -22,20 +24,43 @@ interface BookmarkTag {
 
 export const useBookmarkStore = defineStore('bookmark', {
   state: (): BookmarkState => ({
-    isLoading: false,
-    isError: false,
-    bookmarks: []
+    isFetchLoading: false,
+    isFetchError: false,
+    bookmarks: [],
+    isCreateLoading: false,
+    isCreateError: false
   }),
   actions: {
     async fetchBookmarks(): Promise<void> {
-      this.isLoading = true
+      this.isFetchLoading = true
       try {
         const response = await $fetch<Bookmark[]>('/api/bookmark')
         this.bookmarks = response
       } catch {
-        this.isError = true
+        this.isFetchError = true
       } finally {
-        this.isLoading = false
+        this.isFetchLoading = false
+      }
+    },
+    async createBookmark({
+      name,
+      url
+    }: {
+      name: string
+      url: string
+    }): Promise<{ url: string } | null> {
+      this.isCreateLoading = true
+      try {
+        const response = await $fetch<{ url: string }>('/api/bookmark', {
+          method: 'POST',
+          body: { name, url }
+        })
+        return { url: response.url }
+      } catch {
+        this.isCreateError = true
+        return null
+      } finally {
+        this.isCreateLoading = false
       }
     }
   },

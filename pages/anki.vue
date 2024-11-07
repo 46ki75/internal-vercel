@@ -60,7 +60,6 @@ import { useAnkiStore } from '~/stores/ankiStore'
 const ankiStore = useAnkiStore()
 
 onMounted(ankiStore.fetchLearn)
-// watch(() => ankiStore.isUpdateLoading, ankiStore.next)
 </script>
 
 <style scoped lang="scss">
