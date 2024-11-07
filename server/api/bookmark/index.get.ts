@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     const NOTION_API_KEY = process.env.NOTION_API_KEY
-    const database_id = process.env.NOTION_WEBSITES_DATABASE_ID
+    const database_id = process.env.NOTION_BOOKMARK_DATABASE_ID
 
     if (NOTION_API_KEY == null) {
       setResponseStatus(event, 500)
@@ -25,8 +25,7 @@ export default defineEventHandler(async (event) => {
 
     const bookmarks = await client.databases.query({
       database_id,
-      page_size: 100,
-      filter: { property: 'type', select: { equals: 'Bookmark' } }
+      page_size: 100
     })
 
     const results = bookmarks.results.map((page) => {
@@ -88,7 +87,8 @@ export default defineEventHandler(async (event) => {
     })
 
     return results
-  } catch {
+  } catch (e) {
+    console.error(e)
     setResponseStatus(event, 500)
     return { error: 'Internal server error' }
   }
