@@ -1,9 +1,13 @@
 <template>
-  <NuxtLayout name="default">
-    <ClientOnly>
-      <NuxtPage />
-    </ClientOnly>
-  </NuxtLayout>
+  <ClientOnly>
+    <Suspense>
+      <template #default>
+        <NuxtLayout name="default"><NuxtPage /></NuxtLayout>
+      </template>
+
+      <template #fallback><Fallback /></template>
+    </Suspense>
+  </ClientOnly>
 </template>
 
 <style lang="scss">
