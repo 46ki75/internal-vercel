@@ -12,8 +12,8 @@ importers:
         specifier: 1.0.0-alpha.43
         version: 1.0.0-alpha.43
       '@elmethis/notion-node':
-        specifier: 1.0.0-alpha.10
-        version: 1.0.0-alpha.10
+        specifier: 1.0.0-alpha.11
+        version: 1.0.0-alpha.11
       '@heroicons/vue':
         specifier: ^2.1.5
         version: 2.1.5(vue@3.5.12(typescript@5.6.3))
@@ -227,8 +227,8 @@ packages:
   '@elmethis/core@1.0.0-alpha.43':
     resolution: {integrity: sha512-HOzDf4xxaDHQy8pyWys3lc/HlMSooB9EJ41HJRZuFaWlY4hyrmlcO5/jUQeKF3qnfSrhXfYF+0ObzVpTh4RpiQ==}
 
-  '@elmethis/notion-node@1.0.0-alpha.10':
-    resolution: {integrity: sha512-vZuc92gTkDt9EFJFoo2jJO1quSe6xLMoEbxzPeqQFgW7LONnGLR8Sf8UlVOPslsCsL+k0NOMfBoP6bbohn+utg==}
+  '@elmethis/notion-node@1.0.0-alpha.11':
+    resolution: {integrity: sha512-++hQIqsSl3ba7RkTwIncWKNGHwFfkeyxwC45OT5tFZ+P0W1a6sH5oePJSF4ORsaGsHoZ29e6s6hWflsoX6a9Hw==}
 
   '@esbuild/aix-ppc64@0.21.5':
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
@@ -3706,7 +3706,7 @@ snapshots:
 
   '@elmethis/core@1.0.0-alpha.43': {}
 
-  '@elmethis/notion-node@1.0.0-alpha.10':
+  '@elmethis/notion-node@1.0.0-alpha.11':
     dependencies:
       '@notionhq/client': 2.2.15
       open-graph-scraper: 6.8.2
