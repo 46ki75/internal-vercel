@@ -11,7 +11,7 @@
     "format": "prettier --write \"**/*.{js,ts,jsx,tsx,vue,json,md}\""
   },
   "dependencies": {
-    "@elmethis/core": "1.0.0-alpha.43",
+    "@elmethis/core": "1.0.0-alpha.47",
     "@elmethis/notion-node": "1.0.0-alpha.11",
     "@heroicons/vue": "^2.1.5",
     "@mdi/font": "^7.4.47",

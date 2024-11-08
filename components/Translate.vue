@@ -32,6 +32,10 @@
     TRANSLATE
   </ElmButton>
 
+  <div class="loading">
+    <ElmArrowIcon direction="down" :loading="translateStore.isLoading" />
+  </div>
+
   <ElmCodeBlock
     v-if="translateStore.result"
     :code="translateStore.result.text"
@@ -45,7 +49,8 @@ import {
   ElmInlineText,
   ElmParagraph,
   ElmProgress,
-  ElmButton
+  ElmButton,
+  ElmArrowIcon
 } from '@elmethis/core'
 
 import { useTranslateStore } from '~/stores/translateStore'
@@ -60,3 +65,12 @@ onMounted(async () => {
   await translateStore.fetchUsage()
 })
 </script>
+
+<style scoped lang="scss">
+.loading {
+  margin-block: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
