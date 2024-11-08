@@ -1,8 +1,13 @@
+<script setup lang="ts">
+import { ElmPagetop } from '@elmethis/core'
+</script>
+
 <template>
   <Header />
   <main class="main">
     <slot />
   </main>
+  <ElmPagetop />
 </template>
 
 <style scoped lang="scss">
