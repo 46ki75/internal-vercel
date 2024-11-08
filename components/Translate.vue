@@ -33,7 +33,11 @@
   </ElmButton>
 
   <div class="loading">
-    <ElmArrowIcon direction="down" :loading="translateStore.isLoading" />
+    <ElmArrowIcon
+      v-if="translateStore.result"
+      direction="down"
+      :loading="translateStore.isLoading"
+    />
   </div>
 
   <ElmCodeBlock
