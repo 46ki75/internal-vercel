@@ -10,21 +10,21 @@
       <template v-if="ankiStore.block != null">
         <div class="card" v-if="!ankiStore.isBlockLoading">
           <ElmInlineText text="front" bold size="1.25rem" />
-          <ElmJsonRenderer :json="ankiStore.block.front" />
+          <ElmJsonRendererAsync :json="ankiStore.block.front" />
         </div>
         <template v-if="ankiStore.isShowAnswer">
           <ElmDivider />
 
           <div class="card">
             <ElmInlineText text="back" bold size="1.25rem" />
-            <ElmJsonRenderer :json="ankiStore.block.back" />
+            <ElmJsonRendererAsync :json="ankiStore.block.back" />
           </div>
 
           <ElmDivider />
 
           <div class="card">
             <ElmInlineText text="explanation" bold size="1.25rem" />
-            <ElmJsonRenderer :json="ankiStore.block.explanation" />
+            <ElmJsonRendererAsync :json="ankiStore.block.explanation" />
           </div>
 
           <AnkiUpdate />
@@ -50,9 +50,9 @@ import {
   ElmToggle,
   ElmDivider,
   ElmInlineText,
-  ElmJsonRenderer,
   ElmBlockFallback,
-  ElmButton
+  ElmButton,
+  ElmJsonRendererAsync
 } from '@elmethis/core'
 
 import { useAnkiStore } from '~/stores/ankiStore'
