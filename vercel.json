@@ -1,7 +1,0 @@
-{
-    "functions": {
-        "server/api/anki/**/*": {
-            "maxDuration": 30
-        }
-    }
-}
