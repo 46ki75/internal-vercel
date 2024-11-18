@@ -1,6 +1,6 @@
 {
     "functions": {
-        "server/api/**/*": {
+        "server/api/anki/**/*": {
             "maxDuration": 30
         }
     }
