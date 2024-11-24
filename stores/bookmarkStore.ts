@@ -33,9 +33,11 @@ export const useBookmarkStore = defineStore('bookmark', {
   actions: {
     async fetchBookmarks(): Promise<void> {
       this.isFetchLoading = true
+      this.bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]')
       try {
         const response = await $fetch<Bookmark[]>('/api/bookmark')
         this.bookmarks = response
+        localStorage.setItem('bookmarks', JSON.stringify(response))
       } catch {
         this.isFetchError = true
       } finally {
