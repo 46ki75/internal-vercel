@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@elmethis/core':
-        specifier: 1.0.0-alpha.81
-        version: 1.0.0-alpha.81
+        specifier: 1.0.0-alpha.85
+        version: 1.0.0-alpha.85
       '@elmethis/notion-node':
         specifier: 1.0.0-alpha.11
         version: 1.0.0-alpha.11
@@ -224,8 +224,8 @@ packages:
     resolution: {integrity: sha512-YLPHc8yASwjNkmcDMQMY35yiWjoKAKnhUbPRszBRS0YgH+IXtsMp61j+yTcnCE3oO2DgP0U3iejLC8FTtKDC8Q==}
     engines: {node: '>=16.13'}
 
-  '@elmethis/core@1.0.0-alpha.81':
-    resolution: {integrity: sha512-m1+4cPHeAai/uCJ0XmeDKpnK+5nIU1MFj8Yo9Ys7u6gA3MtWKJT6ZFrtAJJgX7mjJA2eP/5dXh10iqXsuwiBWg==}
+  '@elmethis/core@1.0.0-alpha.85':
+    resolution: {integrity: sha512-Z/Sc9MQtxEkxDiMyr3b6KX9XBH69YRqf+Z+B4puBZkRAsmnl2W18VOljbYZIToL/1ATQ7DLvls14KXV3rrcMFg==}
 
   '@elmethis/notion-node@1.0.0-alpha.11':
     resolution: {integrity: sha512-++hQIqsSl3ba7RkTwIncWKNGHwFfkeyxwC45OT5tFZ+P0W1a6sH5oePJSF4ORsaGsHoZ29e6s6hWflsoX6a9Hw==}
@@ -3704,7 +3704,9 @@ snapshots:
     dependencies:
       mime: 3.0.0
 
-  '@elmethis/core@1.0.0-alpha.81': {}
+  '@elmethis/core@1.0.0-alpha.85':
+    dependencies:
+      nanoid: 5.0.8
 
   '@elmethis/notion-node@1.0.0-alpha.11':
     dependencies:
